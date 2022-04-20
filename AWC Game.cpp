@@ -5,9 +5,45 @@
 #include <string>
 #include <windows.h>
 
-
-
 using namespace std;
+
+class Level1
+{
+    bool restart;
+    int direction;
+    public:
+    void start() {
+        int number;
+        cout << "You approach a door where you must guess the Correct number\n What number do you guess?: ";
+        cin >> number;
+        if (number == 69) {
+            cout << "Good Guess\n";
+            cout << "You see a path before you. Do you go left or right?\n";
+            cout << "Please type a number bellow.\n";
+            cout << "1.left\n";
+            cout << "2.right\n";
+            cin >> direction;
+            if (cin.fail()) {
+                cout << "\nPlease type a number bellow. 1 is Left, 2 is Right:";
+                cin >> direction;
+            }
+            else{
+                switch (direction) {
+                case 1:
+                    cout << "You continue down the hallway where you run into a short chubby man";
+                    break;
+                case 2:
+                    cout << "You continue down the left hallway until you run into an Italian Giga Chad With massive calves";
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Wrong Guess nigger try again\n";
+            return start();
+        }
+    }
+};
 
 void getTerminalSize() 
 {
@@ -36,21 +72,13 @@ void centerString(string s)
 void game() {
     system("Color 9");
     centerString("The AWC\n");
-    cout << "Nigger";
+    Level1 Level1;
+    Level1.start();
 }
 
 int main()
 {
-    game();
+   game();
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
