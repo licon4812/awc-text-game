@@ -1,6 +1,8 @@
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn add(a:i32, b:i32) -> i32 {
-    a + b
+pub fn say(s: &str) -> String {
+  println!("The Rust function say() received {}", s);
+  let r = String::from("hello ");
+  return r + s;
 }

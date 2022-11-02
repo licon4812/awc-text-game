@@ -1,12 +1,16 @@
 [package]
-name = "awc-text-game"
+name = "awc_text_game"
 version = "0.1.0"
-edition = "2021"
+authors = ["James Alickolli"]
+edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
 
 [lib]
-crate-type = ["cdylib"]
+name = "awc_text_game"
+path = "src/lib.rs"
+crate-type =["cdylib"]
 
 [dependencies]
 wasm-bindgen = "0.2.83"
