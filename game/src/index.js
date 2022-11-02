@@ -7,6 +7,7 @@ import chalkAnimation from 'chalk-animation';
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
 
+
 let playerName;
 
 const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
@@ -25,6 +26,8 @@ async function welcome() {
 
 await welcome()
 await askName()
+await question1()
+await winner()
 
 async function askName() {
     const answers = await inquirer.prompt({
@@ -41,7 +44,7 @@ async function askName() {
 
 async function question1() {
     const answers = await inquirer.prompt({
-        name: 'question_1',
+        name: 'question1',
         type: 'list',
         message: 'Who is the leader of the AWC?',
         choices: [
@@ -64,4 +67,12 @@ async function handleAnswer(isCorrect) {
     } else {
         spinner.error({ text: `💀💀💀 Game over, you lose ${playerName}!` });
     }
+}
+
+async function winner() {
+    console.clear();
+    const msg = `Congrats, ${playerName} !\n you have completed your adventure`;
+    figlet(msg, (err, data) => {
+        console.log(gradient.pastel.multiline(data));
+    })
 }
