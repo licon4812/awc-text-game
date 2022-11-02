@@ -6,7 +6,13 @@ import gradient from "gradient-string";
 import chalkAnimation from 'chalk-animation';
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
+//import Terminal  from 'xterm';
 
+// var term = new window.Terminal({
+//     cursorBlink: true
+// });
+
+// term.open(document.getElementById('xterm'));
 
 let playerName;
 
