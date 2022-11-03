@@ -4,7 +4,7 @@ on:
     branches: [ "production" ]
 jobs:
   docker:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       -
         name: Set up Docker Buildx
@@ -19,6 +19,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
+          contex: .
           push: true
           tags: licon4812/awc_text_game:latest
           
