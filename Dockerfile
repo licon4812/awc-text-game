@@ -1,16 +1,17 @@
-FROM ubuntu:latest
+FROM node:latest
 USER root
-COPY . .
+COPY . . 
+EXPOSE 3000
+EXPOSE 57575
+VOLUME [ "/data" ]
+SHELL ["/bin/bash", "-c"]
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update
-RUN apt-get -y install curl gnupg
-RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
-RUN apt-get -y install nodejs
-WORKDIR /etc/systemd/system
-RUN curl -O https://raw.githubusercontent.com/paradoxxxzero/butterfly/master/butterfly.service
-RUN curl -O https://raw.githubusercontent.com/paradoxxxzero/butterfly/master/butterfly.socket
-RUN systemctl enable butterfly.socket
-RUN systemctl start butterfly.socket
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python3 ./get-pip.py
+RUN python3 -V
+RUN pip install butterfly
+RUN pip install butterfly[themes]  # If you want to use themes
+RUN pip install butterfly[systemd]  # If you want to use systemd
 WORKDIR /game
-RUN npm install
-RUN npm run start 
-CMD [ "./script.sh"  ]
+CMD [ "../script.sh"  ]
