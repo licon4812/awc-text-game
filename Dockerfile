@@ -6,7 +6,7 @@ EXPOSE 57575
 VOLUME [ "/data" ]
 SHELL ["/bin/bash", "-c"]
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-RUN apt-get update
+RUN apt-get update && apt-get upgrade -y
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python3 ./get-pip.py
 RUN python3 -V
