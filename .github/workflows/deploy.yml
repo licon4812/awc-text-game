@@ -1,0 +1,19 @@
+name: Docker Image CI
+on:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:          
+  Deploy:
+      runs-on: ubuntu-latest
+      steps:
+       -
+        name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            docker ps -aq | xargs docker stop | xargs docker rm
+            docker pull licon4812/awc_text_game:latest
+            docker run -d -p57575:57575 licon4812/awc_text_game:latest
