@@ -25,7 +25,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: "{{defaultContext}}"
+          context: .
           push: true
           tags: licon4812/awc_text_game:latest
           
