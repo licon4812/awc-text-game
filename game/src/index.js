@@ -33,7 +33,6 @@ async function welcome() {
 await welcome()
 await askName()
 await question1()
-await winner()
 
 async function askName() {
     const answers = await inquirer.prompt({
@@ -69,7 +68,8 @@ async function handleAnswer(isCorrect) {
     await sleep();
 
     if (isCorrect) {
-        spinner.success({text: `Nice Job ${playerName}.`});
+        spinner.success({ text: `Nice Job ${playerName}.` });
+        await winner()
     } else {
         spinner.error({ text: `💀💀💀 Game over, you lose ${playerName}!` });
     }
