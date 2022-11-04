@@ -8,8 +8,9 @@ import Common from "./common.js"
 import Player from "./player.js"
 
 export default class Level{
-    constructor(levelNumber) {
+    constructor(levelNumber, finalLevel) {
         this.levelNumber = levelNumber
+        this.finalLevel = finalLevel
         this.common = new Common()
         this.player = new Player()
     }
@@ -20,12 +21,13 @@ export default class Level{
     } 
 
     getLevelNumber() {
-        console.log(this.levelNumber)
         return this.levelNumber
     }
 
     async playLevel() {
-        if (this.levelNumber === 0) {
+        if (this.finalLevel === this.levelNumber) {
+            await this.winner(this.player.getName());
+        } else if (this.levelNumber === 0) {
             await this.common.rainbowText("Welcome to the official AWC Text based adventure game")
             console.log(`
                 ${chalk.bgBlue('HOW TO PLAY')}
@@ -41,7 +43,17 @@ export default class Level{
                 'Kazumi Wolff'
             ])
 
-            return this.common.handleAnswer(question == 'SpartaTheNacho', { text: `Nice Job ${this.player.getName}.` }, { text: `💀💀💀 Game over, you lose ${this.player.getName}!` });
+            if (await this.common.handleAnswer(question == 'SpartaTheNacho', `Nice Job ${this.player.getName()}.`, `💀💀💀 Game over, you lose ${this.player.getName()}!`)) {
+                this.setLevelNumber(this.getLevelNumber() + 1)
+            }
         }
+    }
+
+    async winner(playerName) {
+        console.clear();
+        const msg = `Congrats, ${playerName} !\n you have completed your adventure`;
+        figlet(msg, (err, data) => {
+            console.log(gradient.pastel.multiline(data));
+        })
     }
 }

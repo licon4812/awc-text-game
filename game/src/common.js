@@ -1,6 +1,7 @@
 import chalkAnimation from 'chalk-animation';
 import inquirer from "inquirer";
 import { createSpinner } from "nanospinner";
+import Level from './level.js';
 export default class Common{
     constructor() { 
         this.sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms))
@@ -37,23 +38,15 @@ export default class Common{
         }
     }
 
-    async handleAnswer(isCorrect, success, failed) {
+    async handleAnswer(isCorrect, success, failed, level) {
         const spinner = createSpinner('Checking answer...').start();
         //await common.sleep();
         await this.sleep();
         if (isCorrect) {
-            spinner.success(success);
-            await winner()
+            spinner.success({ text: success });
+            return true
         } else {
-            spinner.error(failed);
+            spinner.error({ text: failed });
         }
-    }
-
-    async winner() {
-        console.clear();
-        const msg = `Congrats, ${playerName} !\n you have completed your adventure`;
-        figlet(msg, (err, data) => {
-            console.log(gradient.pastel.multiline(data));
-        })
     }
 }
