@@ -1,4 +1,5 @@
 FROM node:latest
+RUN npm update -g
 USER root
 COPY . . 
 EXPOSE 3000
