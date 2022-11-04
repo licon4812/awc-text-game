@@ -31,15 +31,17 @@ export default class Level{
                 ${chalk.bgBlue('HOW TO PLAY')}
             `)
             this.player.setName(await this.common.inquire("input", "What is your name?", "Player"))
+            this.setLevelNumber(1)
+
         } else if (this.levelNumber === 1) {
-            await this.common.inquire("list", "Who is the leader of the AWC?", null, [
+           let question = await this.common.inquire("list", "Who is the leader of the AWC?", null, [
                 'SpartaTheNacho',
                 'Licon4812',
                 'Megafish009',
                 'Kazumi Wolff'
             ])
 
-            await this.common.handleAnswer(answers.question1 == 'SpartaTheNacho');
+            return this.common.handleAnswer(question == 'SpartaTheNacho', { text: `Nice Job ${this.player.getName}.` }, { text: `💀💀💀 Game over, you lose ${this.player.getName}!` });
         }
     }
 }

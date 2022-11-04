@@ -1,5 +1,6 @@
 import chalkAnimation from 'chalk-animation';
 import inquirer from "inquirer";
+import { createSpinner } from "nanospinner";
 export default class Common{
     constructor() { 
         this.sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms))
@@ -24,6 +25,7 @@ export default class Common{
                     return normal;
                 },
             })
+            return answers.inquire; 
         } else if (type === "list") {
             const answers = await inquirer.prompt({
                 name: 'inquire',
@@ -31,9 +33,27 @@ export default class Common{
                 message: msg,
                 choices: choices
             })
+            return answers.inquire; 
         }
-        return answers.inquire; 
     }
 
-    async handleAnswer(){}
+    async handleAnswer(isCorrect, success, failed) {
+        const spinner = createSpinner('Checking answer...').start();
+        //await common.sleep();
+        await this.sleep();
+        if (isCorrect) {
+            spinner.success(success);
+            await winner()
+        } else {
+            spinner.error(failed);
+        }
+    }
+
+    async winner() {
+        console.clear();
+        const msg = `Congrats, ${playerName} !\n you have completed your adventure`;
+        figlet(msg, (err, data) => {
+            console.log(gradient.pastel.multiline(data));
+        })
+    }
 }
