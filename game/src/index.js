@@ -1,51 +1,33 @@
 #!/usr/bin/env node
 
-import chalk from "chalk";
 import inquirer from "inquirer";
 import gradient from "gradient-string";
-import chalkAnimation from 'chalk-animation';
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
-//import Terminal  from 'xterm';
-
-// var term = new window.Terminal({
-//     cursorBlink: true
-// });
-
-// term.open(document.getElementById('xterm'));
+import Level from "./level.js"
 
 let playerName;
-
 const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
-
-async function welcome() {
-    const rainbowTitle = chalkAnimation.rainbow(
-        'Welcome to the official AWC Text based adventure game'
-    );
-
-    await sleep();
-    rainbowTitle.stop();
-    console.log(`
-        ${chalk.bgBlue('HOW TO PLAY')}
-    `)
-}
-
-await welcome()
-await askName()
+let level = new Level()
+level.setLevelNumber(0)
+level.getLevelNumber()
+await level.playLevel()
+//await welcome()
+//await askName()
 await question1()
 
-async function askName() {
-    const answers = await inquirer.prompt({
-        name: 'player_name',
-        type: 'input',
-        message: 'What is your name?',
-        default() {
-            return 'Player';
-        },
-    })
+// async function askName() {
+//     const answers = await inquirer.prompt({
+//         name: 'player_name',
+//         type: 'input',
+//         message: 'What is your name?',
+//         default() {
+//             return 'Player';
+//         },
+//     })
 
-    playerName = answers.player_name;
-}
+//     playerName = answers.player_name;
+// }
 
 async function question1() {
     const answers = await inquirer.prompt({
@@ -65,8 +47,8 @@ async function question1() {
 
 async function handleAnswer(isCorrect) {
     const spinner = createSpinner('Checking answer...').start();
+    //await common.sleep();
     await sleep();
-
     if (isCorrect) {
         spinner.success({ text: `Nice Job ${playerName}.` });
         await winner()
