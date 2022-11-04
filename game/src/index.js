@@ -9,25 +9,10 @@ import Level from "./level.js"
 let playerName;
 const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 let level = new Level()
-level.setLevelNumber(0)
-level.getLevelNumber()
-await level.playLevel()
+await level.setLevelNumber(0)
 //await welcome()
 //await askName()
-await question1()
-
-// async function askName() {
-//     const answers = await inquirer.prompt({
-//         name: 'player_name',
-//         type: 'input',
-//         message: 'What is your name?',
-//         default() {
-//             return 'Player';
-//         },
-//     })
-
-//     playerName = answers.player_name;
-// }
+//await question1()
 
 async function question1() {
     const answers = await inquirer.prompt({
